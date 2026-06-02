@@ -8,18 +8,18 @@
 
 **The first fully autonomous decentralized parametric weather insurance system on ARC Testnet, powered by Circle Agent Wallet.**
 
-An AI Agent that runs 24/7: it scans on-chain policies, fetches high-precision weather data, and automatically triggers payouts using a **Circle Developer Controlled Wallet** — no human intervention required.
+An AI Agent that runs 24/7: scans on-chain policies, fetches high-precision weather data, and **automatically triggers payouts at UTC 00:00 every day** using a Circle Developer Controlled Wallet.
 
 ---
 
 ## ✨ Key Features
 
-- **Circle Agent Wallet Powered** — Fully autonomous on-chain execution using Circle Developer Controlled Wallets
-- **End-to-End Automation** — Real-time weather monitoring → condition evaluation → automatic `triggerPayout()`
-- **High-Precision Weather Data** — Cumulative rainfall from WeatherAPI (global coverage)
-- **Idempotent & Secure** — One-time payout per policy with retry logic and failure isolation
-- **Production Ready** — Async tasks, structured logging, and robust error handling
-- **Live Dashboard APIs** — Easy monitoring of policies, pool balance, and Agent status
+- **Circle Agent Wallet Powered** — Secure, programmable autonomous execution
+- **Daily UTC 00:00 Settlement** — Fixed daily automatic settlement cycle
+- **End-to-End Automation** — Weather data → condition check → on-chain payout
+- **High-Precision Oracle** — Cumulative rainfall via WeatherAPI (global cities)
+- **Idempotent & Safe** — One payout per policy, retry logic, failure isolation
+- **Production Ready** — APScheduler + AsyncIO + Structured Logging
 
 ---
 
@@ -34,18 +34,22 @@ graph TD
     E -->|Execute triggerPayout()| A
     A -->|USDC Auto Transfer| F[User Wallet]
     style E fill:#7B3FE4,stroke:#fff,color:#fff
-```
 
-##  Quick Start
-1. Clone the Repository
+```
+ Quick Start1. Clonebash
+
 git clone https://github.com/fakenzi/weather-insurance-backend.git
 cd weather-insurance-backend
 
-2. Install Dependencies
-pip install -r requirements.txt
-3. Configure Environment Variables (.env)
+2. Installbash
 
+pip install -r requirements.txt
+
+3. .envenv
+
+# Circle Agent Wallet
 CIRCLE_API_KEY=
+
 ENTITY_SECRET=
 AGENT_WALLET_ID=
 
@@ -53,30 +57,27 @@ CIRCLE_AGENT_ADDRESS=
 CONTRACT_ADDRESS=
 WEATHER_API_KEY=
 
+
+4. Runbash
+
 # Development
 uvicorn main:app --reload
 
-# Production (recommended port)
+# Production
 uvicorn main:app --host 0.0.0.0 --port 8080
-When started, you will see logs like:
 
+You will see:
 
 ⏰ Agent Scheduler started | Daily settlement at UTC 00:00
 📅 Next run: 2026-06-03 00:00:00 UTC
-⏳ 距离下次结算还有 23小时 15分钟
- ```
-
-##Tech Stack
-
-
+```
+# Tech Stack
 Autonomous Execution: Circle Developer Controlled Wallets
-Scheduler: APScheduler (CronTrigger UTC 00:00)
+Scheduler: APScheduler (UTC 00:00)
 Backend: FastAPI + AsyncIO
 Blockchain: Web3.py + ARC Testnet
-Weather Data: WeatherAPI
+Weather: WeatherAPI
 
 
 
 
-
-   
