@@ -28,6 +28,17 @@ An AI Agent that runs 24/7: scans on-chain policies, fetches high-precision weat
 graph TD
     A[ARC Testnet Contract] -->|Fetch unsettled policies| B[AI Agent Backend]
     B -->|Query WeatherAPI| C[Rainfall Data]
+    C --> D{Rainfall ≥ Threshold?}
+    D -->|Yes| E[Circle Agent Wallet]
+    D -->|No| G[Close Policy / No Payout]
+    E -->|triggerPayout()| A
+    A -->|USDC Transfer| F[User Wallet]
+    
+    style E fill:#7B3FE4,stroke:#fff,color:#fff
+```mermaid
+graph TD
+    A[ARC Testnet Contract] -->|Fetch unsettled policies| B[AI Agent Backend]
+    B -->|Query WeatherAPI| C[Rainfall Data]
     C -->|Rainfall ≥ Threshold?| D{Yes}
     D -->|Yes| E[Circle Agent Wallet]
     E -->|triggerPayout()| A
