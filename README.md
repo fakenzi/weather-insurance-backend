@@ -1,4 +1,4 @@
-# 🌧️ **Arc Weather Insurance** - AI Agent Oracle & Autonomous Payout Engine
+# 🌧️ Arc Weather Insurance - AI Agent Oracle & Autonomous Payout Engine
 
 [![ARC Network](https://img.shields.io/badge/Network-ARC_Testnet-6366F1?style=for-the-badge)](https://arc.network)
 [![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org)
@@ -8,18 +8,17 @@
 
 **The first fully autonomous decentralized parametric weather insurance system on ARC Testnet, powered by Circle Agent Wallet.**
 
-An AI Agent that runs 24/7: scans on-chain policies, fetches high-precision weather data, and **automatically triggers payouts at UTC 00:00 every day** using a Circle Developer Controlled Wallet.
+An AI Agent that runs 24/7: scans on-chain policies, fetches high-precision weather data, and automatically triggers payouts **every day at UTC 00:00** using a Circle Developer Controlled Wallet.
 
 ---
 
 ## ✨ Key Features
 
-- **Circle Agent Wallet Powered** — Secure, programmable autonomous execution
-- **Daily UTC 00:00 Settlement** — Fixed daily automatic settlement cycle
-- **End-to-End Automation** — Weather data → condition check → on-chain payout
-- **High-Precision Oracle** — Cumulative rainfall via WeatherAPI (global cities)
-- **Idempotent & Safe** — One payout per policy, retry logic, failure isolation
-- **Production Ready** — APScheduler + AsyncIO + Structured Logging
+- **Circle Agent Wallet Powered** — Secure programmable autonomous execution
+- **Daily UTC 00:00 Settlement** — Fixed cron schedule every midnight UTC
+- **End-to-End Automation** — Weather check → eligibility → on-chain payout
+- **High-Precision Data** — Cumulative rainfall via WeatherAPI
+- **Safe & Idempotent** — One payout per policy with retry logic
 
 ---
 
@@ -27,12 +26,12 @@ An AI Agent that runs 24/7: scans on-chain policies, fetches high-precision weat
 
 ```mermaid
 graph TD
-    A[ARC Testnet Smart Contract] -->|Fetch unsettled policies| B[AI Agent Backend]
-    B -->|Query WeatherAPI| C[High-Precision Rainfall Data]
+    A[ARC Testnet Contract] -->|Fetch unsettled policies| B[AI Agent Backend]
+    B -->|Query WeatherAPI| C[Rainfall Data]
     C -->|Rainfall ≥ Threshold?| D{Yes}
     D -->|Yes| E[Circle Agent Wallet]
-    E -->|Execute triggerPayout()| A
-    A -->|USDC Auto Transfer| F[User Wallet]
+    E -->|triggerPayout()| A
+    A -->|USDC Transfer| F[User Wallet]
     style E fill:#7B3FE4,stroke:#fff,color:#fff
 
 ```
